@@ -1,10 +1,14 @@
 <template>
-	<form>
+	<form @submit.prevent="handleSubmit">
+		<!-- prevents from page refresh -->
 		<label>Email: </label>
 		<input type="email" required v-model="email" />
 		<br />
 		<label>Password: </label>
 		<input type="password" required v-model="password" />
+		<div v-if="passError">{{ passError }}</div>
+		<br />
+		<button type="submit">Submit</button>
 	</form>
 
 	<select v-model="role">
@@ -55,6 +59,7 @@ export default {
 			names: [], // array for multiple checkboxs, need name value with v-model="name"
 			tempSkill: "",
 			skills: [],
+			passError: "",
 		};
 	},
 	methods: {
@@ -69,6 +74,10 @@ export default {
 			// 	if (skill === s) this.skills.splice(s, 1);
 			// }
 			this.skills = this.skills.filter((s) => s !== skill);
+		},
+		handleSubmit() {
+			if (this.password.length <= 6) this.passError = "Password Must be more than 6 characters";
+			else this.passError = "";
 		},
 	},
 };
