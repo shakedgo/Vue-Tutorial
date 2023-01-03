@@ -76,8 +76,9 @@ export default {
 			this.skills = this.skills.filter((s) => s !== skill);
 		},
 		handleSubmit() {
-			if (this.password.length <= 6) this.passError = "Password Must be more than 6 characters";
-			else this.passError = "";
+			this.password.length <= 6
+				? (this.passError = "Password Must be more than 6 characters")
+				: (this.passError = "");
 		},
 	},
 };
